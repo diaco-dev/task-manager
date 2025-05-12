@@ -33,3 +33,9 @@ A simple and asynchronous Task Manager API built using **FastAPI**, **MongoDB**,
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/task-manager.git
+
+### Poetry
+   ```bash
+      poetry init
+      poetry add fastapi
+      poetry install
