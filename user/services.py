@@ -1,14 +1,13 @@
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
-from models import user as models
-from schemas import user as schemas
-from core.pwd import verify_password, get_password_hash
+from user import model as models, schemas as schemas
+from core.password import verify_password, get_password_hash
 
 
 def get_user(db: Session):
     return db.query(models.User).all()
 
-def create_user(db: Session, user:schemas.UserCreate):
+def create_user(db: Session, user: schemas.UserCreate):
     user_exist=db.query(models.User).filter(models.User.email==user.email).first()      # type: ignore
     if user_exist:
         raise HTTPException(status_code=400, detail='email already exist')

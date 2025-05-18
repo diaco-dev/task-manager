@@ -1,8 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database import (get_db)
-from schemas import task as schemas
-from core import task as core
+from tasks import services as core, schemas as schemas
 
 router=APIRouter(prefix='/tasks', tags=['tasks'])
 

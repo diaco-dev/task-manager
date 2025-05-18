@@ -1,11 +1,11 @@
 from sqlalchemy.orm import Session
-from models import task as models
-from schemas import task as schemas
+from tasks import model as models, schemas as schemas
+
 
 def get_tasks(db: Session):
     return db.query(models.Task).all()
 
-def create_task(db: Session, task:schemas.Task):
+def create_task(db: Session, task: schemas.Task):
     db_task=models.Task(**task.model_dump())
     db.add(db_task)
     db.commit()

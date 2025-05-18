@@ -1,8 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database import get_db
-from schemas import user as schemas
-from core import user as core
+from user import services as core, schemas as schemas
 
 router=APIRouter(prefix='/users', tags=['users'])
 
@@ -24,7 +23,7 @@ def delete_user(user_id:int ,db:Session=Depends(get_db)):
 
 @router.patch('/{user_id}', response_model=schemas.Message)
 def update_user_password(user_id:int,
-                         password:schemas.ChangePassword,
+                         password: schemas.ChangePassword,
                          db:Session=Depends(get_db)):
     return core.change_user_password(
         user_id=user_id,
