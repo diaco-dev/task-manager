@@ -1,14 +1,11 @@
 from fastapi import FastAPI
-from database import engine, Base
+import tasks
+import user
 from database import client
 
-print("Creating tables...")
-Base.metadata.create_all(bind=engine)
-print("Done.")
-
 app=FastAPI()
-app.include_router(tasks.router)
-app.include_router(users.router)
+app.include_router(tasks.routers)
+app.include_router(user.routers)
 
 # Optional: Health check endpoint to verify MongoDB connection
 @app.get("/health")
