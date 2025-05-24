@@ -1,5 +1,8 @@
-from sqlalchemy import Column, Integer, String, Boolean
-from database import Base
+from pydantic import BaseModel, Field
+from typing import Optional
+from bson import ObjectId
+from sqlalchemy import Column
+
 
 class User(Base):
     __tablename__='users'
@@ -7,4 +10,4 @@ class User(Base):
     username=Column(String, index=True, unique=True)
     password=Column(String, index=True)
     email=Column(String, index=True)
-    hashed_password = Column(String, nullable=False)
+    hashed_password =Column(String, nullable=False)

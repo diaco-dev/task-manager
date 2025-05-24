@@ -1,17 +1,23 @@
 from fastapi import FastAPI
-import tasks
-import user
-from database import client
+from motor.motor_asyncio import AsyncIOMotorClient
 
-app=FastAPI()
-app.include_router(tasks.routers)
-app.include_router(user.routers)
+# MongoDB client
+client = AsyncIOMotorClient("mongodb://localhost:27017")
 
-# Optional: Health check endpoint to verify MongoDB connection
+
+# Initialize FastAPI and Admin
+app = FastAPI()
+
+
+if __name__ == '__main__':
+    import uvicorn
+    uvicorn.run(app, host='127.0.0.1', port=8000)
+
+
+# Health check for MongoDB
 @app.get("/health")
 async def health_check():
     try:
-        # Ping MongoDB to check connection
         await client.admin.command("ping")
         return {"status": "MongoDB connection OK"}
     except Exception as e:
